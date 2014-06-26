@@ -36,6 +36,7 @@ end
 
 post '/galleries' do
   gallery = Gallery.new(params[:gallery])
+  gallery.name.capitalize!
   gallery.save
   redirect to("/#{gallery.name}")
 end
