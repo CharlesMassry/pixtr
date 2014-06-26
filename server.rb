@@ -15,28 +15,53 @@ end
 
 get "/" do
   @galleries = Gallery.order("name ASC")
-  erb :gallery, layout: :layout
+  erb :gallery
 end
 
 get "/galleries/new" do
-  erb :new_gallery, layout: :layout
+  erb :new_gallery
 end
 
-get "/:gallery_name" do
-  @name = params[:gallery_name]
-  @name.capitalize!
-  @gallery = Gallery.find_by(name: @name)
+get "/galleries/:id" do
+  @gallery = Gallery.find(params[:id])
   if !@gallery.nil?
     @images = @gallery.images
-    erb :index, layout: :layout
+    erb :index
   else
-    erb :error, layout: :layout
+    erb :error
   end
 end
 
-post '/galleries' do
+post "/galleries" do
   gallery = Gallery.new(params[:gallery])
   gallery.name.capitalize!
   gallery.save
-  redirect to("/#{gallery.name}")
+  redirect to("/galleries/#{gallery.name}")
+end
+
+get "/galleries/:id/images/new" do
+  @gallery = Gallery.find(params[:id])
+  erb :new_image
+end
+
+post "/galleries/:id/images/new" do
+  image = Image.create(params[:image])
+  redirect to("galleries/#{image.gallery_id}")
+end
+
+get "/galleries/:id/edit" do
+  @gallery = Gallery.find(params[:id])
+  erb :edit_gallery
+end
+
+put "/galleries/:id" do
+  gallery = Gallery.find(params[:id])
+  gallery.update(params[:gallery])
+  redirect to("/galleries/#{params[:id]}")
+end
+
+delete "/galleries/:id/delete" do
+  gallery = Gallery.find(params[:id])
+  gallery.destroy
+  redirect to("/")
 end

@@ -1,4 +1,12 @@
-<h2><%= @name.capitalize %> Gallery</h2>
+<h2><%= @gallery.name.capitalize %> Gallery</h2>
+<a href="/galleries/<%= @gallery.id %>/images/new" >Add Image</a>
+<a href="/galleries/<%= @gallery.id %>/edit">Edit Gallery</a>
+
+<form action="/galleries/<%= @gallery.id %>/delete" method="POST">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Destroy Gallery">
+</form>
+
 <p>
 <% @images.each do |image|  %>
   <img src="<%= image.url %>" width="200px" />

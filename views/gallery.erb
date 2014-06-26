@@ -1,5 +1,12 @@
+<style>
+ul {
+  list-style-type: none;
+}
+</style>
 <h1>Galleries</h1>
-
+<a href="/galleries/new">New Gallery</a>
+<br/>
+<ul>
 <% @galleries.each do |gallery| %>
-    <a href="/<%= gallery.name %>"><%= gallery.name.capitalize %></a>
+  <li><a href="/galleries/<%= gallery.id %>"><%= gallery.name.capitalize %></a></li>
 <% end %>
