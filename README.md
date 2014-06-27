@@ -1,1 +1,1 @@
-==This is a sinatra app for viewing picures
+This is a sinatra app for viewing picures
