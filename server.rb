@@ -65,3 +65,10 @@ delete "/galleries/:id/delete" do
   gallery.destroy
   redirect to("/")
 end
+
+delete "/galleries/:id/images/:image_id/delete" do
+  image = Image.find(params[:image_id])
+  image.destroy
+  redirect to("/galleries/#{params[:id]}")
+end
+

@@ -8,7 +8,13 @@
 </form>
 
 <p>
+<ul>
 <% @images.each do |image|  %>
-  <img src="<%= image.url %>" width="200px" />
+  <li><img src="<%= image.url %>" width="200px" /></li>
+  <form action="/galleries/<%= @gallery.id %>/images/<%= image.id %>/delete" method="POST">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Destroy Image">
+  </form>
 <% end %>
+</ul>
 </p>
